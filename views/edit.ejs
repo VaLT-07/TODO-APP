@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Task</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <% include partials/header %>
+
+  <main>
+    <form action="/edit/<%= todo.id %>" method="POST" class="todo-form">
+      <input type="text" name="task" value="<%= todo.task %>" />
+      <select name="priority">
+        <option value="High" <%= todo.priority==='High' ? 'selected' : '' %>>High</option>
+        <option value="Medium" <%= todo.priority==='Medium' ? 'selected' : '' %>>Medium</option>
+        <option value="Low" <%= todo.priority==='Low' ? 'selected' : '' %>>Low</option>
+      </select>
+      <button type="submit">Update Task</button>
+    </form>
+    <a href="/"><button>Cancel</button></a>
+  </main>
+
+  <% include partials/footer %>
+</body>
+</html>
