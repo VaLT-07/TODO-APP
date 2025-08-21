@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <form action="/add" method="POST" class="todo-form">
+      <input type="text" name="task" placeholder="Enter task..." />
+      <select name="priority">
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <button type="submit">Add Task</button>
+    </form>
+
+    <form method="GET" class="filter-form">
+      <label>Filter by priority:</label>
+      <select name="priority" onchange="this.form.submit()">
+        <option value="">All</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+    </form>
+
+    <ul class="todo-list">
+      <% todos.forEach(todo => { %>
+        <li>
+          <span><%= todo.task %> (<%= todo.priority %>)</span>
+          <form action="/delete/<%= todo.id %>" method="POST" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+          <a href="/edit/<%= todo.id %>"><button>Edit</button></a>
+        </li>
+      <% }) %>
+    </ul>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
